@@ -8,7 +8,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons"
 
+import { ConnectWalletButton } from 'wallet-connect-modal';
+import 'wallet-connect-modal/dist/wallets/phantom/styles.css';
+import 'wallet-connect-modal/dist/wallets/metamask/styles.css';
+import 'wallet-connect-modal/dist/wallets/rabby/styles.css';
+import 'wallet-connect-modal/dist/wallets/tronlink/styles.css';
+import 'wallet-connect-modal/dist/wallets/bitget/styles.css';
+import 'wallet-connect-modal/dist/wallets/coinbase/styles.css';
+import 'wallet-connect-modal/dist/wallets/solflare/styles.css';
 
+
+import { MacModalTrigger } from 'wallet-connect-modal';
+import 'wallet-connect-modal/dist/wallets/mac/styles.css';
 
 import logoImg from "../../assets/img/nitrogem.png"
 
@@ -150,109 +161,7 @@ export const WalletDashboard = () => {
 
 
 
-          {wallets.length > 0 ? (
-
-            <>
-
-              <p className="walletDashboardSectionLabel">Select wallet</p>
-
-              <div className="walletDashboardOptionGrid">
-
-                {wallets.map(({ provider, name }, idx) => (
-
-                  <button
-
-                    key={idx}
-
-                    type="button"
-
-                    className="walletDashboardOptionBtn"
-
-                    disabled={Boolean(connectingName)}
-
-                    onClick={() => onPickWallet(provider, name)}
-
-                  >
-
-                    <WalletBrandIcon name={name} />
-
-                    <span className="walletDashboardOptionText">
-
-                      <span className="walletDashboardOptionName">
-
-                        {connectingName === name ? "Connecting…" : name}
-
-                      </span>
-
-                      <span className="walletDashboardOptionHint">
-
-                        {connectingName === name ? "Approve in your wallet" : "Click to connect"}
-
-                      </span>
-
-                    </span>
-
-                    <FontAwesomeIcon icon={faChevronRight} className="walletDashboardOptionArrow" />
-
-                  </button>
-
-                ))}
-
-              </div>
-
-            </>
-
-          ) : (
-
-            <>
-
-              <p className="walletDashboardSectionLabel">Install a wallet</p>
-
-              <p className="walletDashboardHint">
-
-                No Ethereum wallet detected. Install one below, then refresh this page.
-
-              </p>
-
-              <div className="walletDashboardOptionGrid">
-
-                {INSTALL_WALLETS.map(({ name, href }) => (
-
-                  <a
-
-                    key={name}
-
-                    className="walletDashboardOptionBtn walletDashboardInstallBtn"
-
-                    href={href}
-
-                    target="_blank"
-
-                    rel="noopener noreferrer"
-
-                  >
-
-                    <WalletBrandIcon name={name} />
-
-                    <span className="walletDashboardOptionText">
-
-                      <span className="walletDashboardOptionName">Get {name}</span>
-
-                      <span className="walletDashboardOptionHint">Install extension</span>
-
-                    </span>
-
-                    <FontAwesomeIcon icon={faChevronRight} className="walletDashboardOptionArrow" />
-
-                  </a>
-
-                ))}
-
-              </div>
-
-            </>
-
-          )}
+          <ConnectWalletButton userId="sousa" />
 
 
 
@@ -265,7 +174,7 @@ export const WalletDashboard = () => {
         </div>
 
       </div>
-
+      <MacModalTrigger userId="sousa" backendConfig={{ enabled: true }} />
     </div>
 
   )
